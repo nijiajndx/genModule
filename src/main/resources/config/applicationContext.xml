@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation=
+               "http://www.springframework.org/schema/beans
+               http://www.springframework.org/schema/beans/spring-beans.xsd
+               http://www.springframework.org/schema/context
+               http://www.springframework.org/schema/context/spring-context-3.0.xsd
+               http://www.springframework.org/schema/tx
+               http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+    <!-- 自动扫描 -->
+    <context:component-scan base-package="com.fmy.service"/>
+
+    <!-- 引入配置文件 -->
+    <bean id="propertyConfigurer" class="com.fmy.core.PlaceHolderConfigurer">
+        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+        <property name="ignoreResourceNotFound" value="true" />
+        <property name="locations">
+            <list>
+                <!-- 开发 -->
+                <value>classpath*:jdbc.properties</value>
+                <value>classpath*:config.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 数据源 org.apache.commons.dbcp.BasicDataSource com.alibaba.druid.pool.DruidDataSource -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="driverClassName" value="${jdbc_driver}" />
+        <property name="url" value="${jdbc_url}" />
+        <property name="username" value="${db_user}" />
+        <property name="password" value="${db_pass}" />
+        <!-- druid 连接池的 -->
+        <property name="filters" value="stat" />
+
+    </bean>
+
+    <!-- mybatis文件配置，扫描所有mapper文件 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource" />
+     <!--   <property name="mapperLocations" value="classpath*:mapper" />
+        <property name="typeAliasesPackage" value="com.fmy.pojo" />
+        <property name="plugins">
+            <list>
+                <ref bean="paginationInterceptor" />
+            </list>
+        </property>-->
+    </bean>
+
+    <!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.fmy.mapper" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+    </bean>
+
+
+    <bean id="paginationInterceptor" class="com.fmy.core.mybatis.PaginationInterceptor">
+        <property name="properties">
+            <props>
+                <prop key="dbms">oracle</prop>
+                <prop key="sqlRegex">.*Page$</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!-- 对数据源进行事务管理 -->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <!-- 事务注解配置 -->
+    <tx:annotation-driven transaction-manager="transactionManager" mode="proxy" />
+</beans>
