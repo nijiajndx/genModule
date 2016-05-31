@@ -36,11 +36,18 @@
         <property name="cache" value="true"/>
         <property name="prefix" value=""/>
         <property name="suffix" value=".ftl"/>
-        <property name="contentType" value="text/html;charset=UTF-8"></property>
+        <property name="contentType" value="text/html;charset=UTF-8"/>
         <property name="requestContextAttribute" value="request"/>
         <property name="exposeSpringMacroHelpers" value="true"/>
         <property name="exposeRequestAttributes" value="true"/>
         <property name="exposeSessionAttributes" value="true"/>
+    </bean>
+
+    <!-- 上传文件解析器 -->
+    <bean id="multipartResolver"
+          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- 1M -->
+        <property name="maxUploadSize" value="1048576"/>
     </bean>
 
     <mvc:resources location="/css/" mapping="/css/**"/>
@@ -49,7 +56,7 @@
 
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/manager/**"/>
+            <mvc:mapping path="/**"/>
             <bean class="com.fmy.core.AuthorityInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>

@@ -30,6 +30,7 @@ public class AuthorityInterceptor extends HandlerInterceptorAdapter {
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         String ctx = request.getContextPath();
         modelAndView.addObject("ctx",ctx);
+        modelAndView.addObject("name","joe");
         super.postHandle(request, response, handler, modelAndView);
     }
 }

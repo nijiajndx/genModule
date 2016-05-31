@@ -10,6 +10,6 @@
 
 </head>
 <body>
-    Hello
+    Hello,${name}
 </body>
 </html>
