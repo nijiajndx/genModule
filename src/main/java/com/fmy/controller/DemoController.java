@@ -13,4 +13,9 @@ public class DemoController extends BaseController {
     public String index(){
         return "index";
     }
+
+    @RequestMapping("welcome.htm")
+    public String welcome(){
+        return "welcome";
+    }
 }

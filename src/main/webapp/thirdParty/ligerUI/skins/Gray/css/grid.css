@@ -135,7 +135,7 @@ padding-left: 15px;
 }
 .l-panel-bar
 {
-    background:white  url('../images/ui/gridbar.jpg') repeat-x; height:28px;  line-height:28px;overflow:hidden;
+    background:white  url('../images/ui/gridbar.jpg') repeat-x; overflow:hidden;
     border-top:1px solid #D6D6D6;
 }
 .l-panel-bbar-inner

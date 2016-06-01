@@ -29,6 +29,13 @@
                 <prop key="template_exception_handler">ignore</prop>
             </props>
         </property>
+        <property name="freemarkerVariables">
+            <map>
+                <entry key="button">
+                    <bean class="com.fmy.core.freemarker.directive.Button" />
+                </entry>
+            </map>
+        </property>
     </bean>
 
     <!--视图解释器 -->
@@ -53,10 +60,11 @@
     <mvc:resources location="/css/" mapping="/css/**"/>
     <mvc:resources location="/js/" mapping="/js/**"/>
     <mvc:resources location="/thirdParty/" mapping="/thirdParty/**"/>
+    <mvc:default-servlet-handler />
 
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/**"/>
+            <mvc:mapping path="/"/>
             <bean class="com.fmy.core.AuthorityInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
