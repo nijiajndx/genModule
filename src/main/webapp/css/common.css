@@ -1,0 +1,17 @@
+/*fix the bug that bootstrap conflicts with ligerui*/
+.l-bar-selectpagesize select{
+    width: 55px;
+    padding: 0 2px;
+    height: 26px;
+}
+
+.l-bar-group .pcontrol input{
+    height: 24px;
+    padding: 0 2px;
+    margin: 0;
+}
+
+.l-bar-message span.l-bar-text{
+    font-size: 12px;
+    line-height:26px;
+}
