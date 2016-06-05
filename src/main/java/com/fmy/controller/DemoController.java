@@ -18,4 +18,9 @@ public class DemoController extends BaseController {
     public String welcome(){
         return "welcome";
     }
+
+    @RequestMapping("form")
+    public String form(){
+        return "form";
+    }
 }

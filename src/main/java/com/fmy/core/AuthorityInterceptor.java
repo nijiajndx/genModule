@@ -1,10 +1,16 @@
 package com.fmy.core;
 
+import com.fmy.pojo.Code;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Author njoe
@@ -32,7 +38,23 @@ public class AuthorityInterceptor extends HandlerInterceptorAdapter {
         if(modelAndView != null){
             modelAndView.addObject("ctx",ctx);
             modelAndView.addObject("name","joe");
+            modelAndView.addObject("codeLists",getCodeList());
         }
         super.postHandle(request, response, handler, modelAndView);
+    }
+
+    private Map<String,List<Code>> getCodeList(){
+        Map<String,List<Code>> maps = Maps.newHashMap();
+
+        ArrayList<Code> codes = Lists.newArrayList(
+                new Code("1", "joe", 1),
+                new Code("2", "peter", 2),
+                new Code("3", "mike", 3)
+        );
+
+        maps.put("name",codes);
+
+        return maps;
+
     }
 }

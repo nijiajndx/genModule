@@ -15,32 +15,42 @@ import java.util.Map;
 public class Button implements TemplateDirectiveModel {
     @Override
     public void execute(Environment env, Map params, TemplateModel[] loopVars, TemplateDirectiveBody body) throws TemplateException, IOException {
-        preCheck(env,params,loopVars,body);
+        preCheck(env, params, loopVars, body);
 
         SimpleScalar urlObj = (SimpleScalar) params.get("url");
         //有权限，则输出按钮，否则什么也不输出
-        if(hasPermission(urlObj.getAsString())){
-            if(!"auth".equals(urlObj.getAsString())){
+        if (hasPermission(urlObj.getAsString())) {
+            if (!"auth".equals(urlObj.getAsString())) {
                 StringBuilder ct = new StringBuilder("<button type=\"button\" ");
 
                 //id属性
                 Object idObj = params.get("id");
-                if(idObj != null){
-                    ct.append(" id=\"").append(((SimpleScalar)idObj).getAsString()).append("\" ");
+                if (idObj != null) {
+                    ct.append(" id=\"").append(((SimpleScalar) idObj).getAsString()).append("\" ");
                 }
 
                 //class属性
-                SimpleScalar classOjb = (SimpleScalar)  params.get("class");
+                SimpleScalar classOjb = (SimpleScalar) params.get("class");
                 //如果class为空，则默认为btn
-                if(classOjb != null && !"".equals(classOjb.getAsString())){
-                    ct.append("class=\"btn ").append(((SimpleScalar)classOjb).getAsString()).append("\" ");
-                }else{
-                    ct.append("class=\"btn\" ");
+                if (classOjb != null && !"".equals(classOjb.getAsString())) {
+                    ct.append("class=\"btn btn-sm ").append(((SimpleScalar) classOjb).getAsString()).append("\" ");
+                } else {
+                    ct.append("class=\"btn btn-sm\" ");
                 }
 
                 //name属性
                 String btnName = ((SimpleScalar) params.get("name")).getAsString();
-                ct.append(">").append(btnName).append("</button>\r");
+                ct.append(">");
+
+                //按钮是否有图标
+                Object iconObj = params.get("icon");
+                if(iconObj != null){
+                    String icon = ((SimpleScalar) iconObj).getAsString();
+                    if(icon != null && !"".equals(icon)){
+                        ct.append("<span class=\"glyphicon ").append(icon).append("\" aria-hidden=\"true\"></span>");
+                    }
+                }
+                ct.append(btnName).append("</button>\r");
 
                 Writer out = env.getOut();
                 out.write(ct.toString());
@@ -58,32 +68,33 @@ public class Button implements TemplateDirectiveModel {
 
         //按钮名不能为空
         Object name = params.get("name");
-        if(name==null){
+        if (name == null) {
             throw new RuntimeException("missing name attribute");
-        }else if(!(name instanceof SimpleScalar)){
+        } else if (!(name instanceof SimpleScalar)) {
             throw new RuntimeException("attribute name should be string");
-        }else if("".equals(((SimpleScalar)name).getAsString())){
+        } else if ("".equals(((SimpleScalar) name).getAsString())) {
             throw new RuntimeException("attribute name should not be blank");
         }
 
         //id属性如果存在，则必须为字符串
         Object id = params.get("id");
-        if(id != null && !(id instanceof SimpleScalar)){
+        if (id != null && !(id instanceof SimpleScalar)) {
             throw new RuntimeException("attribute id should be string");
         }
         //url属性如果存在，则必须为字符串
         Object url = params.get("url");
-        if(url != null && !(url instanceof SimpleScalar)){
+        if (url != null && !(url instanceof SimpleScalar)) {
             throw new RuntimeException("attribute url should be string");
         }
     }
 
     /**
      * 判断当前登录人是否有请求地址的权限
+     *
      * @param url 请求地址
      * @return 是否有请求地址的访问权限
      */
-    public boolean hasPermission(String url){
+    public boolean hasPermission(String url) {
         return true;
     }
 }
