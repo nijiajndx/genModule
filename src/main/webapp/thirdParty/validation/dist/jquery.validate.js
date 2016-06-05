@@ -825,8 +825,11 @@ $.extend( $.validator, {
 				} else {
 					if(element.type === 'select-multiple' ||element.type === 'select-one'){
 						place.insertAfter( $(element).next('.select2') );
+					}else if($(element).parent().data('datetimepicker') != undefined){
+						$(element).parent().parent().append(place);
 					}else{
 						place.insertAfter( element );
+
 					}
 				}
 

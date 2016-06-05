@@ -1497,7 +1497,8 @@ S2.define('select2/selection/single',[
   };
 
   SingleSelection.prototype.clear = function () {
-    this.$selection.find('.select2-selection__rendered').empty();
+    this.$selection.prop('title','').find('.select2-selection__rendered').empty();
+      this.$element.trigger('click.validate');
   };
 
   SingleSelection.prototype.display = function (data, container) {
@@ -1524,6 +1525,7 @@ S2.define('select2/selection/single',[
 
     $rendered.empty().append(formatted);
     $rendered.prop('title', selection.title || selection.text);
+      this.$element.trigger('click.validate');
   };
 
   return SingleSelection;
