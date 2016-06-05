@@ -416,3 +416,7 @@
 	width: 14px;
 	height: 14px;
 }
+
+.input-group .input-group-addon{
+	border-left: 0;
+}

@@ -388,6 +388,8 @@
 
     getDate: function () {
       var d = this.getUTCDate();
+      if(d==undefined)
+          return;
       return new Date(d.getTime() + (d.getTimezoneOffset() * 60000));
     },
 
@@ -440,11 +442,11 @@
       var formatted = this.getFormattedDate();
       if (!this.isInput) {
         if (this.component) {
-          this.element.find('input').val(formatted);
+          this.element.find('input').val(formatted).trigger('focusout.validate');
         }
         this.element.data('date', formatted);
       } else {
-        this.element.val(formatted);
+        this.element.val(formatted).trigger('focusout.validate');
       }
       if (this.linkField) {
         $('#' + this.linkField).val(this.getFormattedDate(this.linkFormat));
@@ -1369,6 +1371,11 @@
 
     reset: function (e) {
       this._setDate(null, 'date');
+      if(this.element.is('div')){
+        this.element.find('input').trigger('focusin.validate');
+      }else{
+        this.element.trigger('focusin.validate');
+      }
     },
 
     convertViewModeText:  function (viewMode) {
