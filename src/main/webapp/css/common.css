@@ -1,17 +1,50 @@
 /*fix the bug that bootstrap conflicts with ligerui*/
-.l-bar-selectpagesize select{
+.l-bar-selectpagesize select {
     width: 55px;
     padding: 0 2px;
     height: 26px;
 }
 
-.l-bar-group .pcontrol input{
+.l-bar-group .pcontrol input {
     height: 24px;
     padding: 0 2px;
     margin: 0;
 }
 
-.l-bar-message span.l-bar-text{
+.l-bar-message span.l-bar-text {
     font-size: 12px;
-    line-height:26px;
+    line-height: 26px;
+}
+
+.form-inline .form-group label {
+    width: 120px;
+    text-align: right;
+    padding-right:15px;
+}
+
+
+.form-group .checkbox label,.form-group .radio label{
+    margin-right:20px;
+}
+
+.form-control.error,.select2-selection.error{
+    border:1px solid #d44950;
+    webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+}
+
+.form-control.error:focus,.select2-selection.error:focus{
+    border-color: #843534;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #ce8483;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 6px #ce8483;
+}
+
+.glyphicon{
+    margin-right:5px;
+}
+
+label.error{
+    color: red;
+    font-weight: normal;
+    font-size: 12px;
 }
