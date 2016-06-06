@@ -3,47 +3,28 @@
 <body>
 <div class="form-container">
 
-    <form class="form-horizontal" id="addForm">
+    <form class="form-horizontal" id="addForm" autocomplete="off">
     <@p.input name="name" label="姓名"/>
     <@p.datepicker name="birth" label="年龄"/>
-    <@p.select id="id" name="gender" placeholder="请填写"  key="name" label="性别"></@p.select>
+    <@p.select id="gender" name="gender" placeholder="请填写"  key="name" label="性别"></@p.select>
     <@p.textarea name="descript" default="hello"/>
-    <@p.input name="name" label="password" type="password"/>
-    <@p.checkbox name="aaa" key="name" data=[{"id":"1","text":"zs"},{"id":"2","text":"ls"},{"id":"3","text":"ww"},{"id":"4","text":"zl"}] default=["2","3"]/>
-    <@p.radio name="bbb" key="name" data=[{"id":"1","text":"zs"},{"id":"2","text":"ls"},{"id":"3","text":"ww"},{"id":"4","text":"zl"}] default="2"/>
+    <@p.input name="name1" label="password" type="password"/>
+    <@p.checkbox name="aaa" key="name" data=[{"id":"1","text":"zs"},{"id":"2","text":"ls"},{"id":"3","text":"ww"},{"id":"4","text":"zl"}] />
+    <@p.radio name="bbb" key="name" data=[{"id":"1","text":"zs"},{"id":"2","text":"ls"},{"id":"3","text":"ww"},{"id":"4","text":"zl"}] />
     <@p.buttonWrap>
         <@button id="saveBtn" url="urlurl" class="btn-primary" name="保存" icon="glyphicon-floppy-disk"/>
         <@button id="cancelBtn" url="urlurl" class="btn-danger" name="取消" icon="glyphicon-floppy-remove"/>
     </@p.buttonWrap>
     </form>
     <form class="form-inline">
-        <div class="form-group">
-            <label for="exampleInputName2">Name</label>
-            <input type="text" class="form-control" id="exampleInputName2" name="name" placeholder="Jane Doe">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputEmail2">12312312312</label>
-            <input type="email" class="form-control" id="exampleInputEmail2" name="gender"
-                   placeholder="jane.doe@example.com">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputName2">Name</label>
-            <input type="text" class="form-control" id="exampleInputName2" name="birth" placeholder="Jane Doe">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputEmail2">Email</label>
-            <input type="email" class="form-control" id="exampleInputEmail2" name="descpt"
-                   placeholder="jane.doe@example.com">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputName2">Nam1e</label>
-            <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputEmail2">Em32132ail</label>
-            <input type="email" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
-        </div>
-        <button type="submit" class="btn btn-default">Send invitation</button>
+    <@p.input name="name" label="姓名" />
+    <@p.datepicker name="birth" label="年龄" clear=false/>
+    <@p.datepicker name="birth" label="年龄" clear=false />
+    <@p.input name="name" label="姓名" />
+    <@p.input name="name" label="姓名" />
+    <@p.datepicker name="birth" label="年龄" clear=false/>
+    <@p.select id="gender" name="gender" placeholder="请填写"  key="name" label="性别"/>
+    <#--<@button id="saveBtn" url="urlurl" class="btn-primary" name="保存" icon="glyphicon-floppy-disk"/>-->
     </form>
 </div>
 <div id="maingrid"></div>
@@ -79,11 +60,11 @@
             allowClear: true
         });
 
-        $('#saveBtn').on('click',function(){
+        $('#saveBtn').on('click', function () {
             validator.form();
         });
 
-        $('#cancelBtn').on('click',function(){
+        $('#cancelBtn').on('click', function () {
             validator.resetForm();
         });
 
@@ -102,6 +83,12 @@
                 descript: {
                     required: true,
                     minlength: 10
+                },
+                aaa: {
+                    required: true
+                },
+                bbb: {
+                    required: true
                 }
             },
             messages: {
@@ -118,6 +105,12 @@
                 descript: {
                     required: '必填',
                     minlength: '最小长度为10'
+                },
+                aaa: {
+                    required: '必填'
+                },
+                bbb: {
+                    required: '必填'
                 }
             }
         });

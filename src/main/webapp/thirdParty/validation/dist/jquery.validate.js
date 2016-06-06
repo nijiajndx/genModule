@@ -825,6 +825,10 @@ $.extend( $.validator, {
 				} else {
 					if(element.type === 'select-multiple' ||element.type === 'select-one'){
 						place.insertAfter( $(element).next('.select2') );
+					}else if(element.type === 'radio' && $(element).parents('div.radio').size() > 0){
+						place.insertAfter( $(element).parents('div.radio') );
+					}else if(element.type ==='checkbox' && $(element).parents('div.checkbox').size() > 0) {
+						place.insertAfter( $(element).parents('div.checkbox'));
 					}else if($(element).parent().data('datetimepicker') != undefined){
 						$(element).parent().parent().append(place);
 					}else{

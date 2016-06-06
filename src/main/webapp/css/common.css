@@ -16,10 +16,12 @@
     line-height: 26px;
 }
 
+.form-inline .form-group{
+    width:350px;
+}
 .form-inline .form-group label {
-    width: 120px;
     text-align: right;
-    padding-right:15px;
+    padding:6px 0px;
 }
 
 
@@ -47,4 +49,8 @@ label.error{
     color: red;
     font-weight: normal;
     font-size: 12px;
+}
+
+.date.input-group .input-group-addon{
+    padding: 6px 8px;
 }
