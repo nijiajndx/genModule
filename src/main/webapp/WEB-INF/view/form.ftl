@@ -24,8 +24,18 @@
     <@p.input name="name" label="姓名" />
     <@p.datepicker name="birth" label="年龄" clear=false/>
     <@p.select id="gender" name="gender" placeholder="请填写"  key="name" label="性别"/>
+    <@p.buttonWrap align="right">
+        <@button id="saveBtn" url="urlurl" class="btn-primary" name="查询" icon="glyphicon-search"/>
+        <@button id="cancelBtn" url="urlurl" class="btn-warning" name="导出" icon="glyphicon-export"/>
     <#--<@button id="saveBtn" url="urlurl" class="btn-primary" name="保存" icon="glyphicon-floppy-disk"/>-->
+    </@p.buttonWrap>
     </form>
+</div>
+<div id="toolbar">
+    <@button id="saveBtn" url="urlurl" class="btn-primary" name="添加" icon="glyphicon-plus"/>
+    <@button id="saveBtn" url="urlurl" class="btn-info" name="修改" icon="glyphicon-pencil"/>
+    <@button id="saveBtn" url="urlurl" class="btn-danger" name="删除" icon="glyphicon-trash"/>
+    <@button id="saveBtn" url="urlurl" class="btn-warning" name="导入" icon="glyphicon-import"/>
 </div>
 <div id="maingrid"></div>
 </body>
