@@ -1,24 +1,39 @@
-<#include "head.ftl"/>
+<#include "/view/head.ftl"/>
 </head>
-<body style="padding:0px;background:#EAEEF5;">
-<div>
-<@button id="a" url="urlurl" name="首选项" class="btn-default"/>
-<@button id="b" url="urlurl" class="btn-primary" name="首选项" />
-<@button url="urlurl" class="btn-warning" name="首选项" />
-<@button url="auth" name="首选项" />
-
-    <input size="16" type="text" value="2012-06-15 14:45" readonly class="form_datetime">
-<@p.select id="id" name="name" class="hi" placeholder="请填写"  default="2"key="name"></@p.select>
-    <select data-placeholder="Select an option" data-allow-clear="true">
-        <option value="1">a</option>
-        <option value="2">b</option>
-        <option value="3">c</option>
-    </select>
-    <div id="maingrid"></div>
+<body>
+<div class="form-container">
+    <form class="form-inline">
+    <@p.input name="name" label="姓名" />
+    <@p.datepicker name="birth" label="年龄" clear=false/>
+    <@p.datepicker name="birth" label="年龄" clear=false />
+    <@p.input name="name" label="姓名" />
+    <@p.input name="name" label="姓名" />
+    <@p.datepicker name="birth" label="年龄" clear=false/>
+    <@p.select id="gender" name="gender" placeholder="请填写"  key="name" label="性别"/>
+    <@p.buttonWrap align="right">
+        <@button id="saveBtn" url="urlurl" class="btn-primary" name="查询" icon="glyphicon-search"/>
+        <@button id="cancelBtn" url="urlurl" class="btn-warning" name="导出" icon="glyphicon-export"/>
+    <#--<@button id="saveBtn" url="urlurl" class="btn-primary" name="保存" icon="glyphicon-floppy-disk"/>-->
+    </@p.buttonWrap>
+    </form>
 </div>
+<div id="toolbar">
+<@button id="saveBtn" url="urlurl" class="btn-primary" name="添加" icon="glyphicon-plus"/>
+    <@button id="saveBtn" url="urlurl" class="btn-info" name="修改" icon="glyphicon-pencil"/>
+    <@button id="saveBtn" url="urlurl" class="btn-danger" name="删除" icon="glyphicon-trash"/>
+    <@button id="saveBtn" url="urlurl" class="btn-warning" name="导入" icon="glyphicon-import"/>
+</div>
+<div id="maingrid"></div>
 </body>
 <script type="text/javascript">
-    $(".form_datetime").datetimepicker({format: 'yyyy-mm-dd hh:ii'});
+    $(".date").datetimepicker(
+            {
+                format: 'yyyy-mm-dd',
+                pickerPosition: 'bottom-left',
+                minView:3,
+                autoclose: true
+            }
+    );
 
     $("#maingrid").ligerGrid({
         columns: [
@@ -26,7 +41,7 @@
             {display: '公司名', name: 'CompanyName', minWidth: 120},
             {display: '联系名', name: 'ContactName', minWidth: 140},
             {display: '城市', name: 'City'}
-        ], data: CustomersData, height: 300, pageSize: 300, rownumbers: true
+        ], data: CustomersData,  pageSize: 300, rownumbers: true
     });
 
     $(function () {
@@ -34,6 +49,63 @@
             placeholder: '请选择......',
             allowClear: true
         });
+
+        $('#saveBtn').on('click', function () {
+            validator.form();
+        });
+
+        $('#cancelBtn').on('click', function () {
+            validator.resetForm();
+        });
+
+        var validator = $('#addForm').validate({
+            rules: {
+                name: {
+                    required: true,
+                    email: true
+                },
+                birth: {
+                    required: true
+                },
+                gender: {
+                    required: true
+                },
+                descript: {
+                    required: true,
+                    minlength: 10
+                },
+                aaa: {
+                    required: true
+                },
+                bbb: {
+                    required: true
+                }
+            },
+            messages: {
+                name: {
+                    required: '必填',
+                    email: '邮箱地址不在不确'
+                },
+                birth: {
+                    required: '必填'
+                },
+                gender: {
+                    required: '必填'
+                },
+                descript: {
+                    required: '必填',
+                    minlength: '最小长度为10'
+                },
+                aaa: {
+                    required: '必填'
+                },
+                bbb: {
+                    required: '必填'
+                }
+            }
+        });
     });
 </script>
 </html>
+
+

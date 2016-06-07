@@ -61,7 +61,7 @@
             {display: '公司名', name: 'CompanyName', minWidth: 120},
             {display: '联系名', name: 'ContactName', minWidth: 140},
             {display: '城市', name: 'City'}
-        ], data: CustomersData, height: 300, pageSize: 300, rownumbers: true
+        ], data: CustomersData,  pageSize: 300, rownumbers: true
     });
 
     $(function () {
