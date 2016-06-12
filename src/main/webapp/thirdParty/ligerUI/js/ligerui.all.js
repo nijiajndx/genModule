@@ -10933,6 +10933,11 @@
             if (p.dataAction != "local" && g.isDataChanged && !confirm(p.isContinueByDataChanged))
                 return false;
             p.pageCount = parseInt($(".pcontrol span", g.toolbar).html());
+            //判断grid的parms是否返回true，是则继续，否则，不执行翻页操作
+            var parms = $.isFunction(p.parms) ? p.parms.call(g) : p.parms;
+            if(parms == false){
+                return false;
+            }
             switch (ctype)
             {
                 case 'first': if (p.page == 1) return; p.newPage = 1; break;

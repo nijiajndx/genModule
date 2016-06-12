@@ -1230,8 +1230,10 @@ $.extend( $.validator, {
 		},
 
 		// http://jqueryvalidation.org/date-method/
-		date: function( value, element ) {
-			return this.optional( element ) || !/Invalid|NaN/.test( new Date( value ).toString() );
+		date: function( value, element,param ) {
+			var format = param==undefined?'YYYY-MM-DD':param;
+			var result = moment(value,format).format();
+			return this.optional( element ) || !/Invalid date|NaN/.test( result );
 		},
 
 		// http://jqueryvalidation.org/dateISO-method/

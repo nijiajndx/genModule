@@ -17,6 +17,7 @@
     <script type="text/javascript" src="${cxt}/thirdParty/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
     <script type="text/javascript" src="${ctx}/thirdParty/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
     <script type="text/javascript" src="${cxt}/thirdParty/select2/dist/js/select2.full.js"></script>
+    <script type="text/javascript" src="${cxt}/thirdParty/moment/moment.js"></script>
     <script type="text/javascript" src="${cxt}/thirdParty/validation/dist/jquery.validate.js"></script>
     <script type="text/javascript" src="${cxt}/js/common.js"></script>
     <script type="text/javascript" src="${cxt}/js/indexdata.js"></script>

@@ -24,7 +24,7 @@
                 <value>classpath*:jdbc.properties</value>
                 <value>classpath*:config.properties</value>
                 <!--外部配置-->
-                <value>file:/external/jdbc.properties</value>
+                <value>file: ../../../external/jdbc.properties</value>
             </list>
         </property>
     </bean>

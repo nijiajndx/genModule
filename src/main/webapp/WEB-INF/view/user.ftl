@@ -3,7 +3,7 @@
 </head>
 <body>
 <div class="form-container">
-    <form class="form-inline">
+    <form id="searchForm" method="post" class="form-inline">
     <@p.input name="name" label="姓名" />
     <@p.datepicker name="birth" label="出生日期" clear=false/>
     <@p.select id="gender" name="gender" placeholder="请填写"  key="gender" label="性别"/>
@@ -11,6 +11,7 @@
         <@button id="searchBtn" url="urlurl" class="btn-primary" name="查询" icon="glyphicon-search"/>
         <@button id="exportBtn" url="urlurl" class="btn-warning" name="导出" icon="glyphicon-export"/>
     </@p.buttonWrap>
+        <div id="errorWap"></div>
     </form>
 </div>
 <div id="toolbar">

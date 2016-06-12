@@ -3,6 +3,7 @@ package com.fmy.pojo;
 import com.fmy.core.mybatis.dto.BaseDto;
 import com.fmy.core.mybatis.dto.PageDto;
 import com.fmy.core.mybatis.dto.Paginationable;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -16,6 +17,7 @@ public class User extends BaseDto implements Paginationable {
     private PageDto page = new PageDto();
     private String id;
     private String name;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birth;
     private String gender;
     private String qualification;
