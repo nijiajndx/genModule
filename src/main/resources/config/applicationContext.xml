@@ -12,7 +12,7 @@
                http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
     <!-- 自动扫描 -->
-    <context:component-scan base-package="com.fmy.service"/>
+    <context:component-scan base-package="com.fmy"/>
 
     <!-- 引入配置文件 -->
     <bean id="propertyConfigurer" class="com.fmy.core.PlaceHolderConfigurer">
@@ -24,7 +24,7 @@
                 <value>classpath*:jdbc.properties</value>
                 <value>classpath*:config.properties</value>
                 <!--外部配置-->
-                <value>file://external/jdbc.properties</value>
+                <value>file:/external/jdbc.properties</value>
             </list>
         </property>
     </bean>
@@ -43,13 +43,13 @@
     <!-- mybatis文件配置，扫描所有mapper文件 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
-     <!--   <property name="mapperLocations" value="classpath*:mapper" />
+        <property name="mapperLocations" value="classpath*:mapper/*.xml" />
         <property name="typeAliasesPackage" value="com.fmy.pojo" />
         <property name="plugins">
             <list>
                 <ref bean="paginationInterceptor" />
             </list>
-        </property>-->
+        </property>
     </bean>
 
     <!-- DAO接口所在包名，Spring会自动查找其下的类 -->

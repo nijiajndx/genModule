@@ -50,6 +50,15 @@
             allowClear: true
         });
 
+        $fmy.alert({
+            title:'This is warning',
+            content:'what the fuck is this?',
+            type:'danger'
+        });
+//        setTimeout(function(){
+//            $fmy.closeAlert('aa1');
+//        },5000);
+
         $('#saveBtn').on('click', function () {
             validator.form();
         });

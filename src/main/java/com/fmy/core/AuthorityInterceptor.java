@@ -46,13 +46,30 @@ public class AuthorityInterceptor extends HandlerInterceptorAdapter {
     private Map<String,List<Code>> getCodeList(){
         Map<String,List<Code>> maps = Maps.newHashMap();
 
-        ArrayList<Code> codes = Lists.newArrayList(
-                new Code("1", "joe", 1),
-                new Code("2", "peter", 2),
-                new Code("3", "mike", 3)
+        ArrayList<Code> genders = Lists.newArrayList(
+                new Code("0", "保密", 1),
+                new Code("1", "男", 2),
+                new Code("2", "女", 3)
         );
+        maps.put("gender",genders);
 
-        maps.put("name",codes);
+        ArrayList<Code> qualifications = Lists.newArrayList(
+                new Code("0", "小学", 1),
+                new Code("1", "初中", 2),
+                new Code("2", "高中", 3),
+                new Code("2", "大学", 4),
+                new Code("2", "研究生", 5)
+        );
+        maps.put("qualification",qualifications);
+
+        ArrayList<Code> interests = Lists.newArrayList(
+                new Code("0", "蓝球", 1),
+                new Code("1", "足球", 2),
+                new Code("2", "排球", 3),
+                new Code("2", "乒乓球", 4),
+                new Code("2", "铅球", 5)
+        );
+        maps.put("interest",interests);
 
         return maps;
 

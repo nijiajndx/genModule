@@ -9180,10 +9180,10 @@
         fixedCellHeight: true,                       //是否固定单元格的高度
         heightDiff: 0,                         //高度补差,当设置height:100%时，可能会有高度的误差，可以通过这个属性调整
         cssClass: null,                    //类名
-        root: 'Rows',                       //数据源字段名
-        record: 'Total',                     //数据源记录数字段名
-        pageParmName: 'page',               //页索引参数名，(提交给服务器)
-        pagesizeParmName: 'pagesize',        //页记录数参数名，(提交给服务器)
+        root: 'rows',                       //数据源字段名
+        record: 'total',                     //数据源记录数字段名
+        pageParmName: 'page.pageNo',               //页索引参数名，(提交给服务器)
+        pagesizeParmName: 'page.pageSize',        //页记录数参数名，(提交给服务器)
         sortnameParmName: 'sortname',        //页排序列名(提交给服务器)
         sortorderParmName: 'sortorder',      //页排序方向(提交给服务器) 
         allowUnSelectRow: false,           //是否允许反选行 
@@ -9217,7 +9217,7 @@
         detail: null,
         detailHeight: 260,
         isShowDetailToggle: null,                  //是否显示展开/收缩明细的判断函数
-        rownumbers: false,                         //是否显示行序号
+        rownumbers: true,                         //是否显示行序号
         frozenRownumbers: true,                  //行序号是否在固定列中
         rownumbersColWidth: 26,
         colDraggable: false,                       //是否允许表头拖拽
@@ -9555,7 +9555,7 @@
             gridhtmlarr.push("                    <div class='l-bar-button l-bar-btnprev'><span></span></div>");
             gridhtmlarr.push("                </div>");
             gridhtmlarr.push("                <div class='l-bar-separator'></div>");
-            gridhtmlarr.push("                <div class='l-bar-group'><span class='pcontrol'> <input type='text' size='4' value='1' style='width:20px' maxlength='3' /> / <span></span></span></div>");
+            gridhtmlarr.push("                <div class='l-bar-group'><span class='pcontrol'> <input type='text' size='4' value='1' style='width:20px;text-align:center;' maxlength='10' /> / <span></span></span></div>");
             gridhtmlarr.push("                <div class='l-bar-separator'></div>");
             gridhtmlarr.push("                <div class='l-bar-group'>");
             gridhtmlarr.push("                     <div class='l-bar-button l-bar-btnnext'><span></span></div>");
@@ -9842,6 +9842,7 @@
             var g = this, p = this.options;
             g.loading = true;
             g.trigger('loadData');
+            g.f.gridheader.find('tr').removeClass('l-checked');
             var clause = null;
             var loadServer = true;
             if (typeof (loadDataParm) == "function")
@@ -10914,6 +10915,14 @@
             if (p.dataAction == "server")
             {
                 g.loadData(p.where);
+            }
+        },
+        //重新加载第一页
+        load:function(){
+            if(this.options.page == 1){
+                this.loadData(this.options.where);
+            }else{
+                this.changePage('first');
             }
         },
         //改变分页
@@ -13340,6 +13349,14 @@
             {
                 g.changePage('input');
             });
+            $('span.pcontrol :text', g.toolbar).keyup(function(e){
+                if(e.which == 13){
+                    g.changePage('input');
+                }else{
+                    var length = this.value.length==0?1:this.value.length;
+                    $(this).css('width',8*length+12);
+                }
+            });
             $("div.l-bar-button", g.toolbar).hover(function ()
             {
                 $(this).addClass("l-bar-button-over");
@@ -13941,6 +13958,12 @@
                         return false;
                     var met = uncheck ? 'unselect' : 'select';
                     g[met](src.data);
+                    //检测复选框和全选框的关系
+                    if(g.selected.length == g.recordNumber){
+                        grid.f.gridheader.find('tr').addClass("l-checked");
+                    }else{
+                        grid.f.gridheader.find('tr').removeClass("l-checked");
+                    }
                     if (p.tree && p.autoCheckChildren)
                     {
                         var children = g.getChildren(src.data, true);

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fmy.mapper.UserMapper">
+    <resultMap id="userResult" type="User">
+        <id property="id" column="id" />
+        <result property="name" column="name"/>
+        <result property="birth" column="birth"/>
+        <result property="gender" column="gender"/>
+        <result property="qualification" column="qualification"/>
+        <result property="interest" column="interest"/>
+        <result property="introduction" column="introduction"/>
+    </resultMap>
+
+    <!-- 下发所有协议条款 -->
+    <select id="findByPage" parameterType="map" resultType="User">
+        select * from ts_user where 1=1
+        <if test="name != null and name != ''">
+            and name like '%${name}%'
+        </if>
+        <if test="birthStart !=null and birthEnd != ''">
+            and birth &gt;= to_date(${birthStart,'yyyy-mm-dd'})
+        </if>
+        <if test="birthEnd !=null and birthEnd != ''">
+            and birth &lt;= to_date(${birthEnd,'yyyy-mm-dd'})
+        </if>
+        <if test="gender != null and gender != ''">
+            and gender = ${gender}
+        </if>
+        <if test="qualification != null and qualification != ''">
+            and qualification = ${qualification}
+        </if>
+    </select>
+</mapper>

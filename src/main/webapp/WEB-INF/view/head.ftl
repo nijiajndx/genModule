@@ -15,8 +15,10 @@
     <script type="text/javascript" src="${cxt}/thirdParty/jquery/jquery.cookie.js"></script>
     <script type="text/javascript" src="${cxt}/thirdParty/bootstrap/dist/js/bootstrap.js"></script>
     <script type="text/javascript" src="${cxt}/thirdParty/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script type="text/javascript" src="${ctx}/thirdParty/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
     <script type="text/javascript" src="${cxt}/thirdParty/select2/dist/js/select2.full.js"></script>
     <script type="text/javascript" src="${cxt}/thirdParty/validation/dist/jquery.validate.js"></script>
+    <script type="text/javascript" src="${cxt}/js/common.js"></script>
     <script type="text/javascript" src="${cxt}/js/indexdata.js"></script>
     <script type="text/javascript" src="${cxt}/js/customData.js"></script>
     <script type="text/javascript" src="${cxt}/js/fmy.js"></script>
